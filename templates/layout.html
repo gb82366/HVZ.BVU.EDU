@@ -1,0 +1,150 @@
+<html !DOCTYPE>
+  <head>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>HVZ::{% block title %}{% endblock %}</title>
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--main CSS-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+    <!--Sidebar CSS-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/sidebar.css')}}">
+    <!--Player Info CSS-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/player-info.css')}}">
+  {% block head %}{% endblock %}
+  </head>
+  <body>
+  	<div class="wrapper">
+    	<!--sidebar-->
+      	<nav id="sidebar">
+
+        	<!--sidebar-header>
+        	<div class="sidebarHeader">
+          		<hr>
+        	</div-->
+
+        	<!--sidebar content-->
+        	<ul id="navList" class="list-unstyled components bgActive">
+          	<li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+{% if current_user.is_authenticated %}
+	        	<li><a href="{{ url_for('myStats') }}">My Profile</a></li>
+
+	        	<li><a href="{{ url_for('missions') }}">Missions</a></li>
+
+	        	<li><a href="{{ url_for('killCodes') }}">Killcodes</a></li>
+
+	        	<li><a href="{{ url_for('playerList') }}">Player List</a></li>
+{% endif %}
+
+	        	<li><a href="{{ url_for('rules') }}">Rules</a></li>
+
+	        	<!--li><a href="{{ url_for('chat') }}">Chat</a></li-->
+{% if current_user.status=="M" %}
+	        	<li><a href="{{ url_for('modPanel') }}">Mod Panel</a></li>
+{% endif %}
+
+	        	<li class="sidebarToggle" ><div id="sidebarMargin"><img id="sbToggleImg" src="{{url_for('static', filename='images/navToggle.png')}}"></div></li>
+      	</nav>
+	  	<div id="pageHeader">
+	      <div>
+	      		<img id="sideToggle" class="logo" src="{{url_for('static', filename='images/logo.png')}}">
+	   		</div>
+	      	<div class="headImg">
+{% if current_user.status == "Z" %}
+	      		<img class="wide" src="{{url_for('static', filename='images/zombieHeaderWide.png')}}">
+            <img class="narrow" src="{{url_for('static', filename='images/zombieHeaderNarrow.png')}}">
+{% elif current_user.status == "H" or current_user.status =="O" %}
+            <img class="wide" src="{{url_for('static', filename='images/humanHeaderWide.png')}}">
+            <img class="narrow" src="{{url_for('static', filename='images/humanHeaderNarrow.png')}}">
+{% else %}
+            <img class="wide" src="{{url_for('static', filename='images/modHeaderWide.png')}}">
+            <img class="narrow" src="{{url_for('static', filename='images/modHeaderNarrow.png')}}">
+{% endif %}
+	    	</div>
+        <div>
+{% if current_user.is_anonymous %}
+					<table width=100% height="100%">
+						<tr>
+			        <td>
+                <a class="btn btn-success" href="{{ url_for('registration') }}" align="left">Create Account</a>
+			        </td>
+            </tr>
+            <tr>
+			        <td>
+			          <a class="btn btn-success" href="{{ url_for('login') }}" align="right">Login</button>
+			        </td>
+			      </tr>
+					</table>
+{% else %}
+          <br>
+          <br>
+          <br>
+          <table width=100% height=100%>
+            <tr>
+              <h4 style="color: #FFF">{{ current_user.name }}</h4>
+            </tr>
+{% if current_user.inGame %}
+            <tr>
+              <h4 style="color: #FFF">({{ current_user.killCode }})</h4>
+            </tr>
+{% elif not current_user.inGame and game_state=="OPEN" %}
+            <tr>
+              <a class="btn btn-success" href="{{url_for('joinGame') }}" align="right">Join Game</a>
+              <br>
+            </tr>
+{% else %}
+            <tr>
+              <h4 style="color: #FFF">(NO GAME AVAILABLE)</h4>
+            </tr>
+{% endif %}
+
+            <tr>
+              <br>
+              <a class="btn btn-success" href="{{ url_for('logout') }}" align="right">Log out</a>
+            </tr>
+          </table>
+{% endif %}
+
+        </div>
+	   	</div>
+	    <!--main page-->
+	    <div id="c" class="">
+
+        <!--ERROR MESSAGES-->
+        <!--div class=nonContentBlock-->
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              <div id="messages" class="nonContentBlock">
+                {% for message in messages %}
+                    <div class="alert alert-danger">
+                      <button type="button" class="close" onclick="check()"  data-dismiss="alert">&times;</button>
+                      {{ message }}
+                    </div>
+                {% endfor %}
+              </div>
+              <script>
+                function check(){
+                  if ($('#messages').children().length == 1){
+                    $('#messages').remove();
+                  }
+                }
+              </script>
+            {% endif %}
+          {% endwith %}
+        <!--/div-->
+
+        <!--MAIN CONTENT-->
+	    	<div id="content" class="">
+            {% block content %}{% endblock %}
+	    	</div>
+		  </div>
+    <!-- jQuery-->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <!--Bootstrap js-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--sidebar js-->
+    <script src="{{url_for('static', filename='js/sidebar.js')}}"></script>
+{% block footer %}
+{% endblock %}
+
+  </body>
+</html>

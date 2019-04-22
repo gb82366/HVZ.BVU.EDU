@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}{{tit}}{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/forms.css") }}">
+{% endblock %}
+{% block content %}
+<div class="contentBlock">
+  <form action="" method="post">
+  {{ form.csrf_token }}
+  <div class="container" style="width:100%">
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <div class="row"> 
+      {% if field.type == "SubmitField" %}
+        <br>
+        <div class="col-md-2" style="align:left">{{ field(class="btn btn-secondary form-btn")}}</div>
+        <div class="col-md-10"></div>
+      {% else %}
+        <div class="col-sm-3">{{field.label}}</div>
+        <div class="col-sm-2">{{field(class="form-field")}}</div>
+        <div class="col-sm-7"></div>
+      {% endif %}
+    <br><br>
+    </div>
+  {% endfor %}
+  </div>
+  </form>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

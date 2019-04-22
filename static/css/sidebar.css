@@ -1,0 +1,87 @@
+#sidebar a, a:hover, a:focus {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s
+}
+
+#sidebar {
+  /*background: #202020;*/
+  transition: all 0.3s;
+  min-width: 250px;
+  max-width: 250px;
+  margin-top: 250px;
+  /*z-index: -2;*/
+}
+
+.sidebarHeader{
+  background-color:#202020;
+}
+
+#sidebar .sidebarHeader hr{
+  height: 4px;
+  border-style: solid;
+  background-color: #000000;
+  border-color: #000000;
+}
+
+.bgActive{
+  background-color:#202020;
+}
+
+#sidebar ul li a {
+  padding: 15px;
+  font-size: 1.2em;
+  display: block;
+  color: #FFF;
+  min-width:220px;
+}
+
+ul ul a {
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+}
+
+#sidebar ul li a:hover {
+  color: #000000;
+  background: #FFFFFF;
+}
+
+.sidebarToggle:hover {
+  background: #FFF;
+}
+
+#sidebar.activeMod {
+  background-color: #101010;
+  margin-top: -123px;
+}
+
+#sidebar.activePlayer {
+  background-color: #101010;
+  margin-top: -70px;
+}
+
+#sidebar.activeAnon {
+  background-color: #101010;
+  margin-top: 88px;
+}
+
+#sidebarMargin {
+  padding: 15px;
+  font-size: 1.2em;
+  display: block;
+}
+
+
+.rotated {
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -moz-transform: rotate(180deg); /* Firefox */
+  -webkit-transform: rotate(180deg); /* Safari and Chrome */
+  -o-transform: rotate(180deg); /* Opera */
+}
+
+/*@media (max-height: ){
+  #sidebarClose {
+  width: 250px;
+}
+} figure out how much space the sidebar takes when done*/

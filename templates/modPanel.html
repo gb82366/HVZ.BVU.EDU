@@ -1,0 +1,94 @@
+{% extends "layout.html" %}
+{% block title %}Mod Panel{% endblock %}
+{% block content %}
+<div class="contentBlock">
+  <div id="gameState">
+{% if game_state == "OPEN" %}
+    <img style="width:100%" onclick='s()' src="{{url_for('static', filename='images/startGame.png')}}">
+{% elif game_state == "STARTED" %}
+    <img style="width:100%" onclick='c()' src="{{url_for('static', filename='images/closeGame.png')}}">
+{% else %}
+    <img style="width:100%" onclick='o()' src="{{url_for('static', filename='images/openGame.png')}}">
+{% endif %}
+  </div>
+  <div class="container" style="width:100%">
+    <div id=OZ-head class="section-header" onclick="uncollapse($('#OZ-title'), $('#OZ-div'))">
+        <h2 id="OZ-title">OZ Functions +</h2>
+    </div>
+    <div class="collapsible" id=OZ-div>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('ozList')}}"> Get List of OZ Candidates </a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('designate')}}"> Designate OZ </a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('reveal')}}"> Reveal OZ </a>
+    </div>
+
+    <div class="section-header" id=player-head onclick="uncollapse($('#player-title'), $('#player-div'))">
+        <h2 id="player-title">Player Functions +</h2>
+    </div>
+    <div class="collapsible" id=player-div>
+        <a class="btn btn-default" style="font-size: 16px"href="{{url_for('statusUpdate')}}"> Update Player Status </a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('updateKC')}}"> Update Player Killcode </a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('addPlayer')}}">Add player to game</a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('modResetPlayerPassword')}}">Reset a player's password</a>
+    </div>
+
+    <div class="section-header" id=other-head" onclick="uncollapse($('#other-title'), $('#other-div'))">
+        <h2 id="other-title">Other Functions +</h2>
+    </div>
+    <div class="collapsible" id=other-div>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('pubMission')}}"> Publish Missions </a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('message')}}">Home Page Message</a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="{{url_for('email')}}">Email a group</a>
+        <br><br>
+        <a class="btn btn-default" style="font-size: 16px" href="http://www.eyebleach.me/dogs/">Random Doggos</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block footer %}
+<script>
+function o(){
+  if (confirm("Are you sure you want to open the game?")){
+    window.location.replace("{{url_for('openGame')}}");
+  }
+  else{
+    alert("Crisis averted");
+  }
+}
+function s(){
+  if (confirm("Are you sure you want to start the game?")){
+    window.location.replace("{{url_for('startGame')}}");
+  }
+  else{
+    alert("Crisis averted");
+  }
+}
+function c(){
+  if (confirm("Are you sure you want to close the game?")){
+    window.location.replace("{{url_for('closeGame')}}");
+  }
+  else{
+    alert("Crisis averted");
+  }
+}
+
+function uncollapse(title, div) {
+    if (title.text().endsWith("+")){ //swap and unhide div
+        title.text(title.text().substring(0, title.text().length-1)+'-');
+        div.toggle(600)
+    }
+    else{//swap symbol and hide div
+        title.text(title.text().substring(0, title.text().length-1)+'+');
+        div.toggle(600)
+    }
+}
+
+
+</script>
+{% endblock %}

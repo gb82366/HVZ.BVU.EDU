@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Player List{% endblock %}
+{% block content %}
+<div class="contentBlock" id='playerStatusCounter'>
+    <h4>Total Players: {{ h_count+z_count }}<br>Humans: {{ h_count }}<br>Zombies: {{ z_count }}</h4>
+</div>
+<div class="contentBlock">
+  <table style="width:100%; color: #FFF">
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Email</b></td>
+      <td><b>Status</b></td>
+      <td><b>Game Kills</b></td>
+      <td><b>Total Kills</b></td>
+      <td><b>Games Played</b></td>
+      </tr>
+    {% for player in players %}
+      <tr class='player' style="margin-bottom:20px"> 
+        <td>{{ player.name }}<br></td>
+        <td>{{ player.email }}</td>
+        {% if player.status=="H" or player.status=="O" %}
+          <td>HUMAN</td>
+        {% elif player.status=="Z" %}
+          <td>ZOMBIE</td>
+        {% elif player.status=="M" %}
+          <td>MODERATOR</td>
+        {% else %}
+          <td>CORPSE</td>
+        {% endif %}
+
+        {% if player.status=="O" %}
+          <td>0</td>
+        {%else%}
+          <td>{{ player.gameKills }}</td>
+        {% endif %}
+
+        {% if player.status=="O" %}
+          <td>{{ player.totalKills - player.gameKills }}</td>
+        {% else %}
+            <td>{{ player.totalKills }}</td>
+        {% endif %}
+        <td>{{ player.gamesPlayed }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/player-info.css')}}">
+<div class="contentBlock">
+  <h2 class="user-info-heading">Account Information</h2>
+  <hr>
+  <table>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Name:</p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.name }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Username:     </p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.username }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Email:</p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.email }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:10px"> 
+        <p class="user-info-descriptor">Kill Code:</p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.killCode }}</p>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <h2 class="user-info-heading">Current Game</h2>
+  <hr>
+  <table>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Kills this Game:</p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.gameKills }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Time alive this game:     </p>
+      </td>
+      <td>
+        <p class="user-info">{{ game_time }}</p>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <h2 class="user-info-heading">Lifetime Stats</h2>
+  <hr>
+  <table>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Total Kills:</p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.totalKills }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Total Time Alive:     </p>
+      </td>
+      <td>
+        <p class="user-info">{{ total_time }}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding-right:10px">
+        <p class="user-info-descriptor">Games Played:</p>
+      </td>
+      <td>
+        <p class="user-info">{{ current_user.gamesPlayed }}</p>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <h2 class="user-info-heading">Password Change</h2>
+  <hr>
+  <a class="btn btn-success" href="{{ url_for('pwreset') }}">Reset Password</a>
+{% if (game_state!="CLOSED")  and not current_user.inGame %}
+  <br>
+  <h2 class="user-info-heading">Join Current Game</h2>
+  <hr>
+
+  <a class="btn btn-success" href="{{ url_for('joinGame') }}">Join Game </a>
+{% endif %}
+
+
+
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

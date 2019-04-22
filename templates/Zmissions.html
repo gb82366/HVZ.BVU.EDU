@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Missions{% endblock %}
+{% block content %}
+  {% if nonePub %}
+    <div class="contentBlock">
+      <p>No missions have been published yet</p>
+    </div>
+  {%endif%}
+  {% for item in missions %}  
+    {% if missions[item] %}
+      <div class="contentBlock">
+        <iframe src="{{url_for('static', filename='zombie/'+item+'.html')}}" frameborder="0" allowtransparency="true" scrolling="no" style="width:100%" onload="resize(this)">
+        </iframe>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+{% block footer %}
+<script>
+  function resize(iframe){
+    iframe.height = iframe.contentWindow.document.body.scrollHeight + "px";
+  }
+</script>
+{% endblock %}

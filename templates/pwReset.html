@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Password Reset{% endblock %}
+{% block content %}
+<div class="contentBlock">
+<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/forms.css")}}">
+<form action="" method="post">
+{{ form.csrf_token }}
+{{ form.password.label }}: <br>
+{{ form.password(class="form-field") }} <br><br>
+{{ form.confirm.label }}: <br>
+{{ form.confirm(class="form-field") }} <br><br>
+{{ form.submit(class="btn btn-secondary form-btn")}}
+</form>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

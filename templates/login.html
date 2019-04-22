@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Login{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/forms.css")}}">
+{% endblock %}
+{% block content %}
+<div class="contentBlock">
+<form action="" method="post">
+{{ form.csrf_token }}
+{{ form.email.label }}: <br>
+{{ form.email(class="form-field") }} <br><br>
+{{ form.password.label }}: <br>
+{{form.password(class="form-field") }} <br><br>
+{{ form.login(class="btn btn-secondary form-btn")}}
+</form>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

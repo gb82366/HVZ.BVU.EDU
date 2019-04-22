@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for("static", filename="css/forms.css")}}">
+{% endblock %}
+{% block content %}
+<div class="contentBlock">
+<form acion="" method="post">
+  {{ form.csrf_token }}
+  {{ form.name.label }}:<br>
+  {{ form.name(class="form-field") }}<br><br>
+  {{ form.username.label }}:<br>
+  {{ form.username(class="form-field") }}<br><br>
+  {{ form.email.label }}:<br>
+  {{ form.email(class="form-field") }}<br><br>
+  {{ form.password.label }}:<br>
+  {{ form.password(class="form-field") }}<br><br>
+  {{ form.confirmPW.label }}:<br>
+  {{ form.confirmPW(class="form-field") }}<br><br>
+  {{ form.register(class="btn btn-secondary form-btn")}} 
+  </form>
+  <h2>THIS DOES NOT PUT YOU IN THE GAME. IT ONLY CREATES AN ACCOUNT</h2>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

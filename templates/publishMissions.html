@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+{% block title %}Publish Missions{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/forms.css") }}">
+{% endblock %}
+{% block content %}
+<div class="contentBlock">
+  <form id="pub-miss">
+    <p>Select a Mission</p>
+    <select id="mission-name" class="form-field">
+      <option value="none">Please Select a Mission</option>
+      {% for i in missions %}
+        <option value={{i}}>{{i}}</option>
+      {% endfor %}
+    </select>
+    <br><br>
+    <p>Select a visibility option</p>
+    <select id="visibility" class="form-field">
+      <option value="none">Not Visible</option>
+      <option value="H">Humans Only</option>
+      <option value="Z">Zombies Only</option>
+      <option value="HZ">Both Humans and Zombies</option>
+    </select><br><br>
+    <button class="btn btn-secondary form-btn" id="submit">Submit</button>
+  </form>
+</div>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript">
+$(document).ready(function() {
+  $('#submit').click(function(evt) {
+    evt.preventDefault();
+    var m = $('#mission-name').val();
+    var v = $('#visibility').val();
+    $.post('{{ url_for('updateMission') }}',
+      {
+        'mission': m,
+        'status' : v
+      },
+      function(resp) {
+        window.location.replace("{{url_for('modPanel')}}");
+    });
+  });
+});
+</script>
+
+</script>
+{% endblock %}

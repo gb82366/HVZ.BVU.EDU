@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}OZ List{% endblock %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/forms.css") }}">
+{% endblock %}
+{% block content %}
+<div class="contentBlock">
+  <table style="width: 50%; color: #FFF">
+    <tr>
+      <td><b>Name</b></td>
+      <td><b>Email</b></td>
+    </tr>
+    <tr>
+      <td><hr></td><td><hr></td>
+    </tr>
+    {% for i in lst %}
+      <tr>
+        <td>{{ i[0] }}</td>
+        <td>{{ i[1] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

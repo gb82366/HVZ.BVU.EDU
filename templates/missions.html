@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block title %}Missions{% endblock %}
+{% block content %}
+  {% for item in hMissions %}
+    {% if hMissions[item] %}
+      <div class="contentBlock">
+        <iframe src="./missions/human/{{ item }}.html">
+        </iframe>
+      </div>
+      <br>
+      <div class="contentBlock">
+        <iframe src="./missions/zombie/{{ item }}.html">
+        </iframe>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endblock %}
+{% block footer %}{% endblock %}

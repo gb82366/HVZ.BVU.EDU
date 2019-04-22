@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div id="messages">
+{% for i in messages %}
+  <div class="contentBlock">
+    <b>{{i[0]}}:</b> {{i[1]|safe}}
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
+{% block footer %}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+<script tpye="text/javascript" src="{{ url_for('static', filename='js/homeSocket.js') }}"></script
+
+{% endblock %}
