@@ -33,3 +33,5 @@ Planned features:
 - channel based chat
 - mission editor
 - autologin on user creation
+
+runs on port 80 with "python3 app.py"
